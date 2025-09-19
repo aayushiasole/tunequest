@@ -16,10 +16,8 @@ export const loginUrl =
   `?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}` +
   `&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}` +
   `&scope=user-top-read` +
-  `&response_type=token` +        // 👈 MUST be token
+  `&response_type=token` +
   `&show_dialog=true`;
-
-
  
 
 function App() {
