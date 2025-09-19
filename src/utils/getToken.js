@@ -1,19 +1,9 @@
 // src/utils/getToken.js
 export async function exchangeCodeForToken(code) {
-  const verifier = localStorage.getItem('pkce_verifier');
-
-  const body = new URLSearchParams({
-    client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: process.env.REACT_APP_REDIRECT_URI,
-    code_verifier: verifier,
-  });
-
-  const res = await fetch('https://accounts.spotify.com/api/token', {
+  const res = await fetch('https://<your-backend-project>.vercel.app/api/token', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code })
   });
 
   if (!res.ok) {
@@ -21,9 +11,13 @@ export async function exchangeCodeForToken(code) {
   }
 
   const data = await res.json();
-  // Save token for later API calls
+
+  // Save access token
   localStorage.setItem('spotify_access_token', data.access_token);
-  // Optional: store refresh_token if you want to refresh later
-  if (data.refresh_token) localStorage.setItem('spotify_refresh_token', data.refresh_token);
+  // Optional: store refresh token
+  if (data.refresh_token) {
+    localStorage.setItem('spotify_refresh_token', data.refresh_token);
+  }
+
   return data.access_token;
 }

@@ -5,9 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #121212;   /* Spotify-like dark background */
+  color: #ffffff;              /* light text */
+  min-height: 100vh;
+  margin: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+a {
+  color: #1DB954;              /* Spotify green links/buttons */
 }

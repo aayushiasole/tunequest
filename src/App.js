@@ -1,43 +1,51 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import Home from './pages/Home';
 import TopTracks from './pages/TopTracks';
 import AlbumFinder from './pages/AlbumFinder';
 import About from './pages/About';
 
-import { exchangeCodeForToken } from './utils/getToken';
+/* ----------- Spotify Implicit Grant ----------- */
+const clientId    = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+const redirectUri = process.env.REACT_APP_REDIRECT_URI;
+const scopes      = process.env.REACT_APP_SCOPES;
+
+export const loginUrl =
+  `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}` +
+  `&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}` +
+  `&scope=${encodeURIComponent(process.env.REACT_APP_SCOPES)}` +
+  `&response_type=token&show_dialog=true`;
+
 
 function App() {
-  // Hold the access token in state and also persist it in localStorage
   const [token, setToken] = useState(
     localStorage.getItem('spotify_access_token') || null
   );
 
   useEffect(() => {
-    // Look for ?code=... in the URL after Spotify redirects back
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-
-    if (code && !token) {
-      // Exchange the code for an access token using our PKCE verifier
-      exchangeCodeForToken(code)
-        .then((accessToken) => {
-          setToken(accessToken);
-          // Remove the code parameter from the URL so it looks clean
-          window.history.replaceState({}, document.title, '/');
-        })
-        .catch((err) => console.error('Token exchange error:', err));
+  // check hash fragment for access_token
+  const hash = window.location.hash;
+  if (hash && hash.includes('access_token')) {
+    const params = new URLSearchParams(hash.replace('#', ''));
+    const _token = params.get('access_token');
+    if (_token) {
+      localStorage.setItem('spotify_access_token', _token);
+      setToken(_token);
+      // clean the URL so hash disappears
+      window.location.hash = '';
     }
-  }, [token]);
+  } else {
+    const saved = localStorage.getItem('spotify_access_token');
+    if (saved) setToken(saved);
+  }
+}, []);
 
   return (
     <Router>
       <NavigationBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Pass the token as a prop so these pages can call the Spotify API */}
+        <Route path="/" element={<Home loginUrl={loginUrl} />} />
         <Route path="/top-tracks" element={<TopTracks token={token} />} />
         <Route path="/album-finder" element={<AlbumFinder token={token} />} />
         <Route path="/about" element={<About />} />
