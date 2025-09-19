@@ -1,6 +1,23 @@
 .receipt {
-  font-family: "Courier New", Courier, monospace;
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-color: #1e1e1e;       /* dark slip */
+  border: 2px dashed #444;         /* dashed border like a receipt */
+  width: 320px;                    /* typical receipt width */
+  margin: 40px auto;               /* center horizontally + top/bottom space */
+  padding: 25px 20px;              /* inner spacing */
+  color: #fff;
+  font-family: 'Courier New', monospace;  /* real receipt vibe */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);  /* subtle depth */
+}
+
+.receipt h4 {
+  color: #1db954;                  /* Spotify green title */
+  margin-bottom: 20px;
+}
+
+.receipt hr {
+  border-top: 1px dashed #555;
+}
+
+.receipt div {
+  margin: 4px 0;
 }
