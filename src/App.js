@@ -11,12 +11,15 @@ const clientId    = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 const scopes      = process.env.REACT_APP_SCOPES;
 
-export const loginUrl =
-  `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}` +
+ export const loginUrl =
+  `https://accounts.spotify.com/authorize` +
+  `?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}` +
   `&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}` +
   `&scope=${encodeURIComponent(process.env.REACT_APP_SCOPES)}` +
-  `&response_type=token&show_dialog=true`;
+  `&response_type=token` +        // ✅ MUST be token
+  `&show_dialog=true`;
 
+ 
 
 function App() {
   const [token, setToken] = useState(
@@ -26,15 +29,18 @@ function App() {
 useEffect(() => {
   if (!token) {
     const hash = window.location.hash;
-    if (hash) {
+    if (hash && hash.includes("access_token")) {
       const params = new URLSearchParams(hash.substring(1));
-      const access_token = params.get("access_token");
-      if (access_token) {
-        localStorage.setItem("spotify_access_token", access_token);
-        setToken(access_token);
-        // clean the URL so it looks nice
+      const _token = params.get("access_token");
+      if (_token) {
+        localStorage.setItem("spotify_access_token", _token);
+        setToken(_token);
+        // clean the URL so the #access_token part disappears
         window.history.replaceState({}, document.title, "/");
       }
+    } else {
+      const saved = localStorage.getItem("spotify_access_token");
+      if (saved) setToken(saved);
     }
   }
 }, [token]);
