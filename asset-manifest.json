@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tunequest/static/css/main.789d9357.css",
-    "main.js": "/tunequest/static/js/main.1aaeff64.js",
+    "main.js": "/tunequest/static/js/main.8fa4fea8.js",
     "static/js/453.c0b8eb45.chunk.js": "/tunequest/static/js/453.c0b8eb45.chunk.js",
     "index.html": "/tunequest/index.html",
     "main.789d9357.css.map": "/tunequest/static/css/main.789d9357.css.map",
-    "main.1aaeff64.js.map": "/tunequest/static/js/main.1aaeff64.js.map",
+    "main.8fa4fea8.js.map": "/tunequest/static/js/main.8fa4fea8.js.map",
     "453.c0b8eb45.chunk.js.map": "/tunequest/static/js/453.c0b8eb45.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.789d9357.css",
-    "static/js/main.1aaeff64.js"
+    "static/js/main.8fa4fea8.js"
   ]
 }
