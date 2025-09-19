@@ -11,13 +11,14 @@ const clientId    = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 const scopes      = process.env.REACT_APP_SCOPES;
 
- export const loginUrl =
+export const loginUrl =
   `https://accounts.spotify.com/authorize` +
   `?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}` +
   `&redirect_uri=${encodeURIComponent(process.env.REACT_APP_REDIRECT_URI)}` +
-  `&scope=${encodeURIComponent(process.env.REACT_APP_SCOPES)}` +
-  `&response_type=token` +        // ✅ MUST be token
+  `&scope=user-top-read` +
+  `&response_type=token` +        // 👈 MUST be token
   `&show_dialog=true`;
+
 
  
 
