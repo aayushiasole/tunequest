@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tunequest/static/css/main.1c1f88ed.css",
-    "main.js": "/tunequest/static/js/main.28759215.js",
+    "main.css": "/tunequest/static/css/main.789d9357.css",
+    "main.js": "/tunequest/static/js/main.1aaeff64.js",
     "static/js/453.c0b8eb45.chunk.js": "/tunequest/static/js/453.c0b8eb45.chunk.js",
     "index.html": "/tunequest/index.html",
-    "main.1c1f88ed.css.map": "/tunequest/static/css/main.1c1f88ed.css.map",
-    "main.28759215.js.map": "/tunequest/static/js/main.28759215.js.map",
+    "main.789d9357.css.map": "/tunequest/static/css/main.789d9357.css.map",
+    "main.1aaeff64.js.map": "/tunequest/static/js/main.1aaeff64.js.map",
     "453.c0b8eb45.chunk.js.map": "/tunequest/static/js/453.c0b8eb45.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c1f88ed.css",
-    "static/js/main.28759215.js"
+    "static/css/main.789d9357.css",
+    "static/js/main.1aaeff64.js"
   ]
 }
