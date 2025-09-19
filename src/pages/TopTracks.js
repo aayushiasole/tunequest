@@ -42,23 +42,19 @@ export default function TopTracks({ token }) {
   if (error)   return <Alert variant="danger">{error}</Alert>;
 
   return (
-  <Container
-    fluid
-    className="d-flex justify-content-center align-items-start"
-    style={{ minHeight: '100vh', paddingTop: '60px' }}
-  >
-    <div className="receipt">
-      <h4 className="text-center">🎵 TuneQuest Receipt</h4>
-      <hr />
-      {tracks.map((track, idx) => (
-        <div key={track.id} className="d-flex justify-content-between">
-          <span>{idx + 1}. {track.name}</span>
-          <span>{track.artists.map(a => a.name).join(', ')}</span>
-        </div>
-      ))}
-      <hr />
-      <p className="text-center">Thank you for listening!</p>
-    </div>
-  </Container>
-);
+    <Container className="mt-4" style={{maxWidth:'400px'}}>
+      <div className="p-3 border rounded bg-light receipt">
+        <h4 className="text-center mb-3">🎵 TuneQuest Receipt</h4>
+        <hr />
+        {tracks.map((track, idx) => (
+          <div key={track.id} className="d-flex justify-content-between">
+            <span>{idx + 1}. {track.name}</span>
+            <span>{track.artists.map(a => a.name).join(', ')}</span>
+          </div>
+        ))}
+        <hr />
+        <p className="text-center">Thank you for listening!</p>
+      </div>
+    </Container>
+  );
 }
