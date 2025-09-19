@@ -23,23 +23,21 @@ function App() {
     localStorage.getItem('spotify_access_token') || null
   );
 
-  useEffect(() => {
-  // check hash fragment for access_token
-  const hash = window.location.hash;
-  if (hash && hash.includes('access_token')) {
-    const params = new URLSearchParams(hash.replace('#', ''));
-    const _token = params.get('access_token');
-    if (_token) {
-      localStorage.setItem('spotify_access_token', _token);
-      setToken(_token);
-      // clean the URL so hash disappears
-      window.location.hash = '';
+useEffect(() => {
+  if (!token) {
+    const hash = window.location.hash;
+    if (hash) {
+      const params = new URLSearchParams(hash.substring(1));
+      const access_token = params.get("access_token");
+      if (access_token) {
+        localStorage.setItem("spotify_access_token", access_token);
+        setToken(access_token);
+        // clean the URL so it looks nice
+        window.history.replaceState({}, document.title, "/");
+      }
     }
-  } else {
-    const saved = localStorage.getItem('spotify_access_token');
-    if (saved) setToken(saved);
   }
-}, []);
+}, [token]);
 
   return (
     <Router>
