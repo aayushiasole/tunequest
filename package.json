@@ -1,6 +1,6 @@
 {
   "name": "tunequest",
-  "homepage": "https://tunequest-gray.vercel.app",
+  "homepage": "https://tunequest-gray.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
